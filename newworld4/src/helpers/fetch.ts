@@ -39,13 +39,13 @@ export const SafeFetch = async function (url: string, data: object) {
 
             case 406:
                 {
-                    alert(ex + ": at request '" + url + "'");
+                    alert(`${ex}: at request '${URLROOT}${url}'`);
                     return null;
                 }
 
             default:
                 {
-                    alert(ex + ": at request '" + url + "'");
+                    alert(`${ex}: at request '${URLROOT}${url}'`);
                     return null;
                 }
         }
