@@ -1,7 +1,7 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import './Panel.css'
 
-export default function Panel({ children }) {
+export default function Panel({ children }: { children: ReactNode }) {
     return (
         <>
             <div className="panelBorderOuter">
