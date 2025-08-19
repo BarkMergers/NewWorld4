@@ -8,23 +8,10 @@ import { SafeFetchJson, GET } from '../../helpers/fetch';
 import type { AgentFilterOptions } from '../../models/AgentFilterOptions';
 import type { AgentFilterValues } from '../../models/AgentFilterValues';
 import ColumnEditor from '../columEditor/ColumnEditor';
+import type { ColumnData } from '../../models/ColumnData';
+import type { Agent } from '../../models/Agent';
 
 export default function AgentTable() {
-
-    type Person = {
-        selected: boolean;
-        name: string;
-        job: string;
-        color: string;
-    };
-
-
-    type ColumnData = {
-        id: number;
-        active: boolean;
-        name: string;
-        text: string;
-    };
 
     const rawData = [{
         selected: true,
@@ -48,7 +35,7 @@ export default function AgentTable() {
         color: "Red"
     }];
 
-    const [data, setData] = useState<Person[]>(rawData);
+    const [data, setData] = useState<Agent[]>(rawData);
 
     const showSelector = true;
     const showDetail = true;
@@ -70,16 +57,7 @@ export default function AgentTable() {
 
 
 
-    const reloadData = () => {
 
-        let output = Array.from(rawData);
-
-        output = filterValues.color == "" ? output : rawData.filter(agent => agent.color == filterValues.color);
-        output = filterValues.job == "" ? output : rawData.filter(agent => agent.job == filterValues.job);
-        output = filterValues.name == "" ? output : rawData.filter(agent => agent.name == filterValues.name);
-
-        setData(output);
-    }
 
 
 
@@ -97,7 +75,14 @@ export default function AgentTable() {
 
 
 
+    const reloadData = () => {
+        let output = Array.from(rawData);
+        output = filterValues.color == "" ? output : rawData.filter(agent => agent.color == filterValues.color);
+        output = filterValues.job == "" ? output : rawData.filter(agent => agent.job == filterValues.job);
+        output = filterValues.name == "" ? output : rawData.filter(agent => agent.name == filterValues.name);
 
+        setData(output);
+    }
     const [filterValues, setFilterValues] = useState<AgentFilterValues>({ color: "", name: "", job: "" });
     useEffect(() => {
         reloadData();
@@ -116,7 +101,10 @@ export default function AgentTable() {
         let initialColumnData;
         try {
             const rawStorageData: string | null = localStorage.getItem("liststructure_myaccounts")
-            if (rawStorageData != null) {
+            if (rawStorageData == null) {
+                initialColumnData = resetList();
+            }
+            else {
                 initialColumnData = JSON.parse(rawStorageData!);
                 if (initialColumnData == 'null' || initialColumnData == null)
                     initialColumnData = resetList();
@@ -169,7 +157,7 @@ export default function AgentTable() {
 
             <Table tableData={data} selector={showSelector} updater={updater} detail={showDetail} header={getHeader()}>
                 {
-                    data.map((item: Person, index: number) =>
+                    data.map((item: Agent, index: number) =>
                         <TableRow selector={showSelector} updater={updater} detail={showDetail} selected={item.selected} index={index} detailClick={detailClick}>
                             {columnData != null && columnData.map((column: ColumnData) => {
 
