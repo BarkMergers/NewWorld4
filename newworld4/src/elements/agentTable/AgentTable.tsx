@@ -137,9 +137,9 @@ export default function AgentTable() {
     }, [columnData])
     const resetList = () => {
         return [
-            { "active": true, "name": "name", "text": "Name" },
-            { "active": true, "name": "job", "text": "Job" },
-            { "active": true, "name": "color", "text": "Color" },
+            { id: 0, "active": true, "name": "name", "text": "Name" },
+            { id: 1, "active": true, "name": "job", "text": "Job" },
+            { id: 2, "active": true, "name": "color", "text": "Color" },
         ]
     }
 
