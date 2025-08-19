@@ -77,7 +77,7 @@ function App() {
               <Routes>
                   <Route path="/dashboard" element={<Dashboard />}></Route>
                   <Route path="/home" element={<Home />}></Route>
-                  <Route path="/" element={<Plain />}></Route>
+                  <Route path="/" element={<Plain accounts={accounts} />}></Route>
               </Routes>
           </BrowserRouter>
 
