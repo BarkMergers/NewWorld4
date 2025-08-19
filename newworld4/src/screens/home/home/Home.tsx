@@ -5,10 +5,10 @@ import TitleBar from "../../../elements/titleBar/TitleBar";
 export default function Home() {
     return (
         <>
-            <TitleBar title="NewWORLD"></TitleBar>
+            <TitleBar title="NewWORLD 2"></TitleBar>
 
             <StatsBar></StatsBar>
-
+    
             <AgentTable></AgentTable>
         </>
     )
