@@ -6,7 +6,7 @@ export default function Plain() {
     return (
         <>
 
-            <TitleBar></TitleBar>
+            <TitleBar title="NewWORLD"></TitleBar>
             <StatsBar></StatsBar>
 
             <AgentTable></AgentTable>
