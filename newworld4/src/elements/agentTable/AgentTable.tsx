@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { SafeFetchJson, GET } from '../../helpers/fetch';
 import type { AgentFilterOptions } from '../../models/AgentFilterOptions';
 import type { AgentFilterValues } from '../../models/AgentFilterValues';
+import ColumnEditor from '../columEditor/ColumnEditor';
 
 export default function AgentTable() {
 
@@ -15,6 +16,14 @@ export default function AgentTable() {
         name: string;
         job: string;
         color: string;
+    };
+
+
+    type ColumnData = {
+        id: number;
+        active: boolean;
+        name: string;
+        text: string;
     };
 
     const rawData = [{
@@ -101,18 +110,72 @@ export default function AgentTable() {
 
 
 
+
+    const [columnData, setColumnData] = useState<ColumnData[]>([]);
+    useEffect(() => {
+        let initialColumnData;
+        try {
+            const rawStorageData: string | null = localStorage.getItem("liststructure_myaccounts")
+            if (rawStorageData != null) {
+                initialColumnData = JSON.parse(rawStorageData!);
+                if (initialColumnData == 'null' || initialColumnData == null)
+                    initialColumnData = resetList();
+            }
+        }
+        catch {
+            initialColumnData = resetList();
+        }
+        setColumnData(initialColumnData);
+    }, []);
+    useEffect(() => {
+        if (columnData == null) {
+            localStorage.removeItem("liststructure_myaccounts");
+        }
+        else {
+            localStorage.setItem("liststructure_myaccounts", JSON.stringify(columnData));
+        }
+    }, [columnData])
+    const resetList = () => {
+        return [
+            { "active": true, "name": "name", "text": "Name" },
+            { "active": true, "name": "job", "text": "Job" },
+            { "active": true, "name": "color", "text": "Color" },
+        ]
+    }
+
+
+
+
+
+
+
+
+    const openEditor = () => {
+        const dialog = document.getElementById('dialog_tableEditor') as HTMLDialogElement;
+        dialog.showModal();
+    }
+
+
+    const getHeader = () => {
+        return columnData != null && columnData.map((column: ColumnData) => { return column.active && <td>{column.name}</td> });
+    }
+
     return (
         <>
 
-            <TableFilter openEditor={() => alert("No editor!")} applyFilter={applyFilter} filterData={filterOptions}></TableFilter>
+            <ColumnEditor id="dialog_tableEditor" columnData={columnData} setColumnData={setColumnData} resetColumnData={resetList}></ColumnEditor>
 
-            <Table tableData={data} selector={showSelector} updater={updater} detail={showDetail} header={<><td>Name</td><td>Job</td><td>Favorite Color</td></>}>
+            <TableFilter openEditor={openEditor} applyFilter={applyFilter} filterData={filterOptions}></TableFilter>
+
+            <Table tableData={data} selector={showSelector} updater={updater} detail={showDetail} header={getHeader()}>
                 {
-                    data.map((item, index) =>
+                    data.map((item: Person, index: number) =>
                         <TableRow selector={showSelector} updater={updater} detail={showDetail} selected={item.selected} index={index} detailClick={detailClick}>
-                            <td>{item.name}</td>
-                            <td>{item.job}</td>
-                            <td>{item.color}</td>
+                            {columnData != null && columnData.map((column: ColumnData) => {
+
+                                if (column.active)
+                                    return <td>{item[column.name as keyof typeof item]}</td>
+                            })}
                         </TableRow>
                     )
                 }
