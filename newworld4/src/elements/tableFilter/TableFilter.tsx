@@ -1,13 +1,14 @@
 ﻿import './TableFilter.css';
 //import { FaSearch } from 'react-icons/fa';
-import type { PersonFilter } from '../../models/AgentFilterOptions';
+import type { AgentFilterOptions } from '../../models/AgentFilterOptions';
 
-export default function TableFilter({ openEditor, filterData, applyFilter }: { openEditor: () => void, filterData: PersonFilter, applyFilter: (value1: string, value2: string) => void }) {
+export default function TableFilter({ openEditor, filterData, applyFilter }: { openEditor: () => void, filterData: AgentFilterOptions, applyFilter: (value1: string, value2: string) => void }) {
     return (
 
         <div className="my-2 rounded-xl bg-white py-1">
-            {/*<select className="select mx-1 h-8 min-h-0 align-middle"><option>Show all</option><option>Show active</option></select>*/}
 
+
+            {/*<select className="select mx-1 h-8 min-h-0 align-middle"><option>Show all</option><option>Show active</option></select>*/}
             {/*<div className="input search-container">*/}
             {/*    <FaSearch className="search-icon" />*/}
             {/*    <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => applyFilter(e.target.value, "text")} type="text" placeholder="Search vehicle..." className="search-input" style={{ border:"none", background:"none" }} />*/}
@@ -25,11 +26,7 @@ export default function TableFilter({ openEditor, filterData, applyFilter }: { o
                 {filterData?.color != null && filterData.color.map((i: string) => <option key={i}>{i}</option>)}
             </select>
 
-
-
-
             <button className="btn btn-info float-right mx-1 h-auto min-h-0" onClick={openEditor}>Manage Columns</button>
-
 
         </div>
     );
