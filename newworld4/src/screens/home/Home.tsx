@@ -1,9 +1,10 @@
+import CustomerTable from "../../elements/customerTable/CustomerTable";
 
 
 export default function Dashboard() {
     return (
         <>
-            <div>Home</div>
+            <CustomerTable></CustomerTable>
         </>
     )
 }

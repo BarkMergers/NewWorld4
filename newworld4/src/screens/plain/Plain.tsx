@@ -7,9 +7,9 @@ export default function Plain() {
         <>
 
             <TitleBar title="NewWORLD"></TitleBar>
+
             <StatsBar></StatsBar>
 
-            <AgentTable></AgentTable>
             <AgentTable></AgentTable>
 
         </>

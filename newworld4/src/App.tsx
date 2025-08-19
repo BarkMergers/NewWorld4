@@ -7,19 +7,67 @@ import Home from "./screens/home/Home";
 import Plain from "./screens/plain/Plain";
 
 
+import { POST, SafeFetch } from './helpers/fetch';
+import type { SilentRequest } from "@azure/msal-browser";
+
 function App() {
 
 
     const { instance, accounts } = useMsal();
 
-    const handleLogin = () => {
-        instance.loginPopup(loginRequest).catch(e => {
-            console.error(e);
-        });
+    const getSubdomain = (): string => {
+        const x = window.location.hostname.split('.').splice(1, 1).join(".");
+        return x == "" ? "dev" : x;
     };
 
-    const handleLogout = () => {
+    const handleLogin = async () => {
+        try {
+            await instance.loginPopup(loginRequest);
+
+            const account = instance.getAllAccounts()[0];
+            if (!account) throw new Error("No account found after login");
+
+            // Build a request object that includes the account
+            const silentRequest: SilentRequest = {
+                ...loginRequest,
+                account,
+                forceRefresh: true,
+            };
+
+            try {
+                const result = await instance.acquireTokenSilent(silentRequest);
+
+                await SafeFetch(
+                    "api/StoreToken",
+                    POST({ Token: result.accessToken, Tenant: getSubdomain() })
+                );
+
+                //alert(result.accessToken);
+
+                // loginNavigationFunction();
+            } catch (silentError) {
+                console.warn("Silent token failed, trying popup:", silentError);
+
+                const popupResult = await instance.acquireTokenPopup({
+                    ...loginRequest,
+                    account,
+                });
+
+                await SafeFetch(
+                    "api/StoreToken",
+                    POST({ Token: popupResult.accessToken, Tenant: getSubdomain() })
+                );
+
+                // loginNavigationFunction();
+            }
+        } catch (err) {
+            console.error("Login failed:", err);
+        }
+    };
+
+    const handleLogout = async () => {
         instance.logoutPopup();
+        await SafeFetch("api/RemoveToken", POST({}));
     };
 
   return (
