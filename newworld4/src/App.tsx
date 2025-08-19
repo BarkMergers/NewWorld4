@@ -11,7 +11,10 @@ import { POST, SafeFetch } from './helpers/fetch';
 import type { SilentRequest } from "@azure/msal-browser";
 import NavBar from "./elements/navBar/NavBar";
 
+
+
 function App() {
+
 
 
     const { instance, accounts } = useMsal();
@@ -74,9 +77,23 @@ function App() {
   return (
       <>
 
+          {accounts.length > 0 ? (
+              <>
+                  <p>Welcome, {accounts[0].username}</p>
+                  <button onClick={handleLogout}>Logout</button>
+              </>
+          ) : (
+                  <button onClick={handleLogin}>Login with Azure</button>
+          )
+          }
           <BrowserRouter>
 
-              <NavBar title="NewWorld" accounts={accounts} handleLogin={handleLogin} handleLogout={handleLogout} ></NavBar>
+          
+
+
+
+                <NavBar></NavBar>
+
 
               <Routes>
 
@@ -93,13 +110,5 @@ export default App
 
 
 
-          //{accounts.length > 0 ? (
-          //    <>
-          //        <p>Welcome, {accounts[0].username}</p>
-          //        <button onClick={}>Logout</button>
-          //    </>
-          //) : (
-          //    <button onClick={}>Login with Azure</button>
-          //)
-          //}
+
 
