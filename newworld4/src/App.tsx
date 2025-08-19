@@ -4,8 +4,6 @@ import './App.css'
 import { useMsal } from '@azure/msal-react';
 import Dashboard from "./screens/home/dashboard/Dashboard";
 import Home from "./screens/home/home/Home";
-import Plain from "./screens/home/plain/Plain";
-
 
 import { POST, SafeFetch } from './helpers/fetch';
 import type { SilentRequest } from "@azure/msal-browser";
