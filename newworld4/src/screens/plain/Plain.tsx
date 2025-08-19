@@ -8,13 +8,11 @@ import type { AccountInfo } from "@azure/msal-browser";
 export default function Plain({ accounts }: { accounts: AccountInfo[] } ) {
     return (
         <>
-
             <TitleBar title="NewWORLD"></TitleBar>
 
             <StatsBar></StatsBar>
 
             <AgentTable></AgentTable>
-
 
             {
                 accounts.length > 0 &&
