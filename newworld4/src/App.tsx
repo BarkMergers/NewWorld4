@@ -47,8 +47,6 @@ function App() {
                     POST({ Token: result.accessToken, Tenant: getSubdomain() })
                 );
 
-                //alert(result.accessToken);
-
                 // loginNavigationFunction();
             } catch (silentError) {
                 console.warn("Silent token failed, trying popup:", silentError);
@@ -77,25 +75,10 @@ function App() {
 
   return (
       <>
-
-
           <BrowserRouter>
-
-          
-              <div className="bg-white">
-                  {accounts.length > 0 ? (
-                      <>
-                          <p>Welcome, {accounts[0].username}</p>
-                          <button onClick={handleLogout}>Logout</button>
-                      </>
-                  ) : (
-                          <button onClick={handleLogin}>Login with Azure</button>
-                  )
-                  }
-
-              <NavBar></NavBar>
-
-              </div>
+            <div className="bg-white">
+                <NavBar accounts={accounts} handleLogin={handleLogin} handleLogout={handleLogout}></NavBar>
+            </div>
 
             <div className="h-screen flex-grow bg-gray-300 p-4">
 
