@@ -1,5 +1,4 @@
-import CustomerTable from "../../elements/customerTable/CustomerTable";
-
+import CustomerTable from "../../../elements/customerTable/CustomerTable";
 
 export default function Dashboard() {
     return (

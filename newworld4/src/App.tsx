@@ -1,15 +1,16 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";  // Link
+﻿import { BrowserRouter, Routes, Route } from "react-router-dom";  // Link
 import { loginRequest } from './authConfig';
 import './App.css'
 import { useMsal } from '@azure/msal-react';
-import Dashboard from "./screens/dashboard/Dashboard";
-import Home from "./screens/home/Home";
-import Plain from "./screens/plain/Plain";
+import Dashboard from "./screens/home/dashboard/Dashboard";
+import Home from "./screens/home/home/Home";
+import Plain from "./screens/home/plain/Plain";
 
 
 import { POST, SafeFetch } from './helpers/fetch';
 import type { SilentRequest } from "@azure/msal-browser";
 import NavBar from "./elements/navBar/NavBar";
+import Customer from "./screens/customer/customer/Customer";
 
 
 
@@ -77,31 +78,39 @@ function App() {
   return (
       <>
 
-          {accounts.length > 0 ? (
-              <>
-                  <p>Welcome, {accounts[0].username}</p>
-                  <button onClick={handleLogout}>Logout</button>
-              </>
-          ) : (
-                  <button onClick={handleLogin}>Login with Azure</button>
-          )
-          }
+
           <BrowserRouter>
 
           
+              <div className="bg-white">
+                  {accounts.length > 0 ? (
+                      <>
+                          <p>Welcome, {accounts[0].username}</p>
+                          <button onClick={handleLogout}>Logout</button>
+                      </>
+                  ) : (
+                          <button onClick={handleLogin}>Login with Azure</button>
+                  )
+                  }
 
+              <NavBar></NavBar>
 
+              </div>
 
-                <NavBar></NavBar>
+            <div className="h-screen flex-grow bg-gray-300 p-4">
+
 
 
               <Routes>
 
                   <Route path="/dashboard" element={<Dashboard />}></Route>
                   <Route path="/home" element={<Home />}></Route>
+                  <Route path="/customer" element={<Customer />}></Route>
                   <Route path="/" element={<Plain accounts={accounts} />}></Route>
               </Routes>
-          </BrowserRouter>
+            </div>
+
+        </BrowserRouter>
     </>
   )
 }

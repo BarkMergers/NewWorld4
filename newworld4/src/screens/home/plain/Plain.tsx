@@ -1,9 +1,8 @@
-import AgentTable from "../../elements/agentTable/AgentTable";
-import CustomerTable from "../../elements/customerTable/CustomerTable";
-import StatsBar from "../../elements/statsBar/StatsBar";
-import TitleBar from "../../elements/titleBar/TitleBar";
-
 import type { AccountInfo } from "@azure/msal-browser";
+import AgentTable from "../../../elements/agentTable/AgentTable";
+import CustomerTable from "../../../elements/customerTable/CustomerTable";
+import StatsBar from "../../../elements/statsBar/StatsBar";
+import TitleBar from "../../../elements/titleBar/TitleBar";
 
 export default function Plain({ accounts }: { accounts: AccountInfo[] } ) {
     return (
@@ -18,8 +17,6 @@ export default function Plain({ accounts }: { accounts: AccountInfo[] } ) {
                 accounts.length > 0 &&
                 <CustomerTable></CustomerTable>
             }
-
-
         </>
     )
 }

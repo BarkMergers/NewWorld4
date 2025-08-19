@@ -24,13 +24,13 @@ export default function AgentTable() {
             color: "Red"
         }, {
             selected: false,
-            name: "Brice Swyre",
-            job: "Caroll Group",
+            name: "Marjy Frencz",
+            job: "Rowe-Schoen",
             color: "Red"
         }, {
             selected: false,
-            name: "Brice Swyre",
-            job: "Caroll Group",
+            name: "Yancy Tear",
+            job: "Wyman-Ledner",
             color: "Red"
         }]);
 
