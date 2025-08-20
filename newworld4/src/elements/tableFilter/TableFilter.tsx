@@ -14,15 +14,15 @@ export default function TableFilter({ openEditor, filterData, applyFilter }: { o
             {/*    <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => applyFilter(e.target.value, "text")} type="text" placeholder="Search vehicle..." className="search-input" style={{ border:"none", background:"none" }} />*/}
             {/*</div>*/}
 
-            <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => applyFilter(e.target.value, "name")} className="select align-middle text-gray-900 border border-solid border-grey-900 bg-transparent mx-1 h-8 min-h-0"><option value="">Name...</option>
+            <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => applyFilter(e.target.value, "name")} className="select filter-select h-8"><option value="">Name...</option>
                 {filterData?.name != null && filterData.name.map((i: string) => <option key={i}>{i}</option>)}
             </select>
 
-            <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => applyFilter(e.target.value, "job")} className="select text-gray-900 border border-solid border-grey-900 bg-transparent align-middle mx-1 h-8 min-h-0"><option value="">Job...</option>
+            <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => applyFilter(e.target.value, "job")} className="select filter-select h-8"><option value="">Job...</option>
                 {filterData?.job != null && filterData.job.map((i: string) => <option key={i}>{i}</option>)}
             </select>
             
-            <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => applyFilter(e.target.value, "color")} className="select text-gray-900 border border-solid border-grey-900 bg-transparent align-middle mx-1 h-8"><option value="">Color...</option>
+            <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => applyFilter(e.target.value, "color")} className="select filter-select h-8"><option value="">Color...</option>
                 {filterData?.color != null && filterData.color.map((i: string) => <option key={i}>{i}</option>)}
             </select>
 

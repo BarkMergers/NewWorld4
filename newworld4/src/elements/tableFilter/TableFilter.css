@@ -24,3 +24,12 @@
     border-radius: 4px;
     vertical-align: middle;
 }
+
+.filter-select {
+    border: 1px solid silver;
+    background: none;
+    color: #444;
+    appearance: auto;
+    border-radius: 0.5rem;
+    margin-left: 5px;
+}
