@@ -10,6 +10,7 @@ import type { AgentFilterValues } from '../../models/AgentFilterValues';
 import ColumnEditor from '../columEditor/ColumnEditor';
 import type { ColumnData } from '../../models/ColumnData';
 import type { Agent } from '../../models/Agent';
+import Modal from '../../components/modal/Modal';
 
 export default function AgentTable() {
 
@@ -61,9 +62,7 @@ export default function AgentTable() {
         );
     }
 
-    const detailClick = (index: number) => {
-        alert(JSON.stringify(data[index]));
-    }
+
 
 
 
@@ -151,6 +150,17 @@ export default function AgentTable() {
 
 
 
+    const [detailData, setDetailData] = useState<string>("");
+
+
+
+    const detailClick = (index: number) => {
+
+        setDetailData(JSON.stringify(data[index]));
+
+        const dialog = document.getElementById('show_agent') as HTMLDialogElement;
+        dialog.showModal();
+    }
 
 
 
@@ -168,9 +178,16 @@ export default function AgentTable() {
     return (
         <>
 
+            <Modal id="show_agent" title="Agent Details">
+                {detailData}
+            </Modal>
+
             <ColumnEditor id="dialog_tableEditor" columnData={columnData} setColumnData={setColumnData} resetColumnData={resetList}></ColumnEditor>
 
             <TableFilter openEditor={openEditor} applyFilter={applyFilter} filterData={filterOptions}></TableFilter>
+
+
+
 
             <Table tableData={data} selector={showSelector} updater={updater} detail={showDetail} header={getHeader()}>
                 {
@@ -185,6 +202,9 @@ export default function AgentTable() {
                     )
                 }
             </Table>
+
+
+
         </>
     )
 }

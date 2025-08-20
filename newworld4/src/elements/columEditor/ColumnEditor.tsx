@@ -1,24 +1,14 @@
 ﻿import { useRef } from 'react'
 import { ReactSortable } from "react-sortablejs";
 import { FaGripVertical } from 'react-icons/fa'; // Font Awesome
+import type { ColumnData } from '../../models/ColumnData';
 
 
-
-type ColumnData = {
-    id: number;
-    active: boolean;
-    name: string;
-    text: string;
-};
 
 
 export default function ColumnEditor({ id, columnData, setColumnData, resetColumnData }:
     { id: string, columnData: ColumnData[], setColumnData: React.Dispatch<React.SetStateAction<ColumnData[]>>, resetColumnData: () => ColumnData[] }) {
     const modalRef = useRef(null);
-
-
-
-
 
 
 
