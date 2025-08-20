@@ -6,7 +6,7 @@ import StatsItem from '../../components/statsItem/StatsItem';
 export default function StatsBar() {
 
     return (
-        <div className="my-1 flex flex-row gap-2 rounded-lg bg-white px-4 py-1 align-middle text-black">
+        <div className="jaama-panel my-1 flex flex-row gap-2 px-4 py-1 align-middle">
 
             <div className="flex-grow">
                 <StatsItem title="Total Likes" footer="21% more than last month" bodyClass="text-blue-900">

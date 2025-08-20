@@ -5,7 +5,7 @@ import type { AgentFilterOptions } from '../../models/AgentFilterOptions';
 export default function TableFilter({ openEditor, filterData, applyFilter }: { openEditor: () => void, filterData: AgentFilterOptions, applyFilter: (value1: string, value2: string) => void }) {
     return (
 
-        <div className="my-2 rounded-xl bg-white py-1">
+        <div className="jaama-panel y-2 py-1">
 
 
             {/*<select className="select mx-1 h-8 min-h-0 align-middle"><option>Show all</option><option>Show active</option></select>*/}

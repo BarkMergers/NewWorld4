@@ -60,7 +60,7 @@ export default function AgentTable() {
     const showSelector = true;
     const showDetail = true;
 
-    const globalData: GlobalData | undefined = useContext(UserContext);
+    const globalData: GlobalData = useContext(UserContext);
 
     const updater = (value: boolean, index: number) => {
         setData(prevItems =>

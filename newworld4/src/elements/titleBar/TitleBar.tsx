@@ -4,7 +4,7 @@ import { FaSearch } from 'react-icons/fa';
 export default function TitleBar({ title = "NewWorld" }: { title?: string }) {
 
     return (
-        <div className="my-1 flex flex-row items-center gap-2 rounded-lg bg-white px-4 py-1 text-black">
+        <div className="jaama-panel my-1 flex flex-row items-center gap-2 rounded-lg px-4 py-1">
             <span className="grow text-left">
                 {title}
             </span>

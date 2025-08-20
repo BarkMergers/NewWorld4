@@ -27,8 +27,8 @@ export default function Table({ children, header, selector = false, detail = fal
 
     return (
         <>
-            <div>
-                <table className="my-1 table bg-white text-black">
+            <div className="jaama-panel my-1">
+                <table className="table">
 
                     <thead className="text-black">
                         <tr>

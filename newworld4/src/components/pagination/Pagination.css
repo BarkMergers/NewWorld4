@@ -1,21 +1,18 @@
-.paginationButton
+.pagination-button
  {
     display: inline-block;
     transition: 0.3s;
     cursor: pointer;
-    background-color: silver;
 }
 
-    .paginationButton:not(first-child) {
-        border-right: 1px solid black;
+    .pagination-button:not(:first-child) {
+        border-left: 1px solid silver;
     }
 
-.paginationButton:first-child {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+.pagination-bar {
+    display: inline-block;
+    overflow: hidden;
 }
 
-.paginationButton:last-child {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
+
+

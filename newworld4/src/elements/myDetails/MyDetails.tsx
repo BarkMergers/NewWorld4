@@ -65,12 +65,11 @@ export default function MyDetails({ accounts }: { accounts: AccountInfo[] }) {
             </Modal>
 
             <form onSubmit={handleSubmit} className="mx-auto my-10">
-                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                    <p>
-                        <h1>My Details...</h1>
-                    </p>
-
-                    <p>
+                <fieldset className="jaama-panel fieldset bg-base-200 border-base-300 rounded-box w-xs p-4">
+         
+                    <h1>My Details...</h1>
+         
+                    <div>
                         <Label title="Username">{data?.name || ""}</Label>
 
                         <div className="grid grid-cols-2 gap-8">
@@ -81,12 +80,12 @@ export default function MyDetails({ accounts }: { accounts: AccountInfo[] }) {
 
                                 <Input value={data?.name || ""} type="text" title="Name" placeholder="Your name" onChange={(e) => updateData('name', e.target.value)} />
 
-                                <Check value={data?.selected || false} title="Selected" onChange={(e) => updateData('selected', e.target.value)} />
+                                <Check value={data?.selected || false} title="Selected" onChange={(e) => updateData('selected', e.target.checked)} />
                             </div>
                         </div>
-                    </p>
+                    </div>
 
-                    <button type="submit" className="btn btn-neutral mx-auto mt-4">Save</button>
+                    <button type="submit" className="btn btn-primary mx-auto mt-4">Save</button>
 
                 </fieldset>
             </form>

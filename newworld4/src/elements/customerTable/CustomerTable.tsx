@@ -8,6 +8,10 @@ import { POST, SafeFetchJson } from '../../helpers/fetch';
 import type { pagination } from '../../models/Pagination';
 
 
+import { useContext } from "react";
+import type { GlobalData } from '../../models/GlobalData';
+import { UserContext } from '../../helpers/globalData';
+
 
 export default function CustomerTable() {
 
@@ -17,6 +21,8 @@ export default function CustomerTable() {
     const [customerData, setCustomerData] = useState<Customer[]>([]);
     const [pageIndex, setPageIndex] = useState(0);
     const [pagination, setPagination] = useState<pagination>({ pageId: 0, totalPages: 0});
+
+    const globalData: GlobalData = useContext(UserContext);
 
     type Customer = {
         id: number;
@@ -38,11 +44,16 @@ export default function CustomerTable() {
 
     const loadCustomerData = async (newPageIndex: number) => {
         newPageIndex = newPageIndex || 0;
+
+        globalData.SetSpinnerVisible(true);
+
         const newData: CustomerWrapper = await SafeFetchJson(`api/GetCustomer/${newPageIndex}/${pageSize}`, POST({}));
 
         setCustomerData(newData.data);
         setPagination(newData.pagination);
         setPageIndex(newPageIndex);
+
+        globalData.SetSpinnerVisible(false);
 
         return customerData;
     }
