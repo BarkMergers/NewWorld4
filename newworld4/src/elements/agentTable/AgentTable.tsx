@@ -115,7 +115,6 @@ export default function AgentTable() {
 
 
 
-    const [columnData, setColumnData] = useState<ColumnData[]>([]);
     useEffect(() => {
         let initialColumnData;
         try {
@@ -134,6 +133,19 @@ export default function AgentTable() {
         }
         setColumnData(initialColumnData);
     }, []);
+    const resetList = () => {
+        return [
+            { id: 0, active: true, name: "name", text: "Name" },
+            { id: 1, active: true, name: "job", text: "Job" },
+            { id: 2, active: true, name: "color", text: "Color" },
+            { id: 3, active: false, name: "height", text: "Height" },
+            { id: 4, active: false, name: "age", text: "Age" },
+        ]
+    }
+    const [columnData, setColumnData] = useState<ColumnData[]>();
+    const getHeader = () => {
+        return columnData != null && columnData.map((column: ColumnData) => { return column.active && <td>{column.text}</td> });
+    }
     useEffect(() => {
         if (columnData == null) {
             localStorage.removeItem("liststructure_myaccounts");
@@ -142,15 +154,8 @@ export default function AgentTable() {
             localStorage.setItem("liststructure_myaccounts", JSON.stringify(columnData));
         }
     }, [columnData])
-    const resetList = () => {
-        return [
-            { id: 0, "active": true, "name": "name", "text": "Name" },
-            { id: 1, "active": true, "name": "job", "text": "Job" },
-            { id: 2, "active": true, "name": "color", "text": "Color" },
-            { id: 3, "active": false, "name": "height", "text": "Height" },
-            { id: 4, "active": false, "name": "age", "text": "Age" },
-        ]
-    }
+
+
 
 
 
@@ -177,9 +182,7 @@ export default function AgentTable() {
     }
 
 
-    const getHeader = () => {
-        return columnData != null && columnData.map((column: ColumnData) => { return column.active && <td>{column.text}</td> });
-    }
+
 
     return (
         <>
@@ -188,19 +191,15 @@ export default function AgentTable() {
                 {detailData}
             </Modal>
 
-            <ColumnEditor id="dialog_tableEditor" columnData={columnData} setColumnData={setColumnData} resetColumnData={resetList}></ColumnEditor>
+            <ColumnEditor columnData={columnData} setColumnData={setColumnData} resetColumnData={resetList}></ColumnEditor>
 
             <TableFilter openEditor={openEditor} applyFilter={applyFilter} filterData={filterOptions}></TableFilter>
 
-
-
-
-            <Table tableData={data} selector={showSelector} updater={updater} detail={showDetail} header={getHeader()}>
+            <Table tableData={data} selector={showSelector} detail={showDetail} header={getHeader()} updater={updater}>
                 {
                     data.map((item: Agent, index: number) =>
                         <TableRow selector={showSelector} updater={updater} detail={showDetail} selected={item.selected} index={index} detailClick={detailClick}>
                             {columnData != null && columnData.map((column: ColumnData) => {
-
                                 if (column.active)
                                     return <td>{item[column.name as keyof typeof item]}</td>
                             })}

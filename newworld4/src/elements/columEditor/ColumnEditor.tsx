@@ -6,8 +6,8 @@ import type { ColumnData } from '../../models/ColumnData';
 
 
 
-export default function ColumnEditor({ id, columnData, setColumnData, resetColumnData }:
-    { id: string, columnData: ColumnData[], setColumnData: React.Dispatch<React.SetStateAction<ColumnData[]>>, resetColumnData: () => ColumnData[] }) {
+export default function ColumnEditor({ columnData, setColumnData, resetColumnData }:
+    { columnData: ColumnData[], setColumnData: React.Dispatch<React.SetStateAction<ColumnData[]>>, resetColumnData: () => ColumnData[] }) {
     const modalRef = useRef(null);
 
 
@@ -25,7 +25,7 @@ export default function ColumnEditor({ id, columnData, setColumnData, resetColum
     }
 
     return (
-        <dialog ref={modalRef} id={id} className="modal" onCancel={handleESC}>
+        <dialog ref={modalRef} id="dialog_tableEditor" className="modal" onCancel={handleESC}>
             <form method="dialog" className="modal-box text-center">
                 <h3 className="text-center text-lg font-bold">Column Editor</h3>
 

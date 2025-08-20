@@ -30,7 +30,7 @@ export default function Table({ children, header, selector = false, detail = fal
             <div className="jaama-panel my-1">
                 <table className="table">
 
-                    <thead className="text-black">
+                    <thead>
                         <tr>
                             {selector && <td><input ref={chkSelectAll} type="checkbox" onChange={(e) => updater!(e.target.checked, -1)} name="itemSelector" className="h-5 w-5 align-middle"></input></td>}
                             {header}

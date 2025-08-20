@@ -2,7 +2,7 @@
 import Table from '../../components/table/Table'
 import TableRow from '../../components/tableRow/TableRow';
 import Pagination from '../../components/pagination/Pagination';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { POST, SafeFetchJson } from '../../helpers/fetch';
 import type { pagination } from '../../models/Pagination';
@@ -11,6 +11,9 @@ import type { pagination } from '../../models/Pagination';
 import { useContext } from "react";
 import type { GlobalData } from '../../models/GlobalData';
 import { UserContext } from '../../helpers/globalData';
+import type { ColumnData } from '../../models/ColumnData';
+import ColumnEditor from '../columEditor/ColumnEditor';
+import NumberPlate from '../../components/numberPlate/NumberPlate';
 
 
 export default function CustomerTable() {
@@ -84,23 +87,81 @@ export default function CustomerTable() {
         alert(JSON.stringify(customerData[index]));
     }
 
+
+
+
+
+
+    useEffect(() => {
+        let initialColumnData;
+        try {
+            const rawStorageData: string | null = localStorage.getItem("liststructure_customer")
+            if (rawStorageData == null) {
+                initialColumnData = resetList();
+            }
+            else {
+                initialColumnData = JSON.parse(rawStorageData!);
+                if (initialColumnData == 'null' || initialColumnData == null)
+                    initialColumnData = resetList();
+            }
+        }
+        catch {
+            initialColumnData = resetList();
+        }
+        setColumnData(initialColumnData);
+    }, []);
+    const resetList = () => {
+        return [
+            { id: 0, active: true, name: "id", text: "ID" },
+            { id: 1, active: true, name: "vehicle", text: "Vehicle" },
+            { id: 2, active: true, name: "power", text: "Power" },
+            { id: 3, active: true, name: "increasedate", text: "Increase Date" }
+        ]
+    }
+    const getHeader = () => {
+        return columnData != null && columnData.map((column: ColumnData) => { return column.active && <td>{column.text}</td> });
+    }
+    const [columnData, setColumnData] = useState<ColumnData[]>(resetList());
+    useEffect(() => {
+        if (columnData == null) {
+            localStorage.removeItem("liststructure_customer");
+        }
+        else {
+            localStorage.setItem("liststructure_customer", JSON.stringify(columnData));
+        }
+    }, [columnData])
+
+
+
+    const openEditor = () => {
+        const dialog = document.getElementById('dialog_tableEditor') as HTMLDialogElement;
+        dialog.showModal();
+    }
+
+
     return (
         <>
-            <Table selector={showSelector} detail={showDetail} header={<><td></td><td>Vehicle</td><td>Power</td><td>Date</td></>}>
+            <ColumnEditor columnData={columnData} setColumnData={setColumnData} resetColumnData={resetList}></ColumnEditor>
+            <button className="btn btn-primary" type="button" onClick={openEditor}>Edit columns</button>
+
+            <Table selector={showSelector} detail={showDetail} header={getHeader()}>
                 {
                     customerData.map((item, index) =>
-                        <TableRow selector={showSelector} updater={updater} detail={showDetail} index={index} detailClick={detailClick} >
-                            <td>{item.id}</td>
-                            <td>{item.vehicle}</td>
-                            <td>{item.power}</td>
-                            <td>{item.increasedate}</td>
+                        <TableRow selector={showSelector} updater={updater} detail={showDetail} index={index} detailClick={detailClick}>
+                            {columnData != null && columnData.map((column: ColumnData) => {
+                                if (!column.active) return;
+
+                                if (column.name == "vehicle")
+                                    return <td> <NumberPlate>{item.vehicle}</NumberPlate></td>
+                                else
+                                    return <td>{item[column.name as keyof typeof item]}</td>
+                            })}
                         </TableRow>
                     )
                 }
             </Table>
 
             <Pagination data={pagination} updatePage={updatePage}></Pagination>
-
         </>
     )
 }
