@@ -3,16 +3,7 @@
 export default function Modal({ id, title, children, onClose, buttons }:
     { id: string, title: string, children: ReactNode, onClose?: () => void, buttons?: string }) {
 
-
-
     const modalRef = useRef(null);
-
-    //useEffect(() => {
-    //    if (!modalRef.current) {
-    //        return;
-    //    }
-    //    visible ? modalRef.current.showModal() : modalRef.current.close();
-    //}, [visible]);
 
     const handleClose = () => {
         if (onClose) {
@@ -31,7 +22,6 @@ export default function Modal({ id, title, children, onClose, buttons }:
                 <h3 className="p-2 text-center text-lg font-bold">{title}</h3>
                 {children}
 
-
                 {(typeof buttons == "undefined" || buttons == "") &&
                     <div className="modal-action" style={{ justifyContent: "center", paddingTop: "20px" }} >
                         <button className="btn" onClick={handleClose}>Close</button>
@@ -45,9 +35,7 @@ export default function Modal({ id, title, children, onClose, buttons }:
                     </div>
                 }
 
-
             </form>
         </dialog>
     );
 }
-

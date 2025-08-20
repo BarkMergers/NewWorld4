@@ -11,6 +11,9 @@ import ColumnEditor from '../columEditor/ColumnEditor';
 import type { ColumnData } from '../../models/ColumnData';
 import type { Agent } from '../../models/Agent';
 import Modal from '../../components/modal/Modal';
+import { useContext } from "react";
+import type { GlobalData } from '../../models/GlobalData';
+import { UserContext } from '../../helpers/globalData';
 
 export default function AgentTable() {
 
@@ -55,6 +58,8 @@ export default function AgentTable() {
 
     const showSelector = true;
     const showDetail = true;
+
+    const globalData: GlobalData | undefined = useContext(UserContext);
 
     const updater = (value: boolean, index: number) => {
         setData(prevItems =>
@@ -156,8 +161,9 @@ export default function AgentTable() {
 
     const detailClick = (index: number) => {
 
-        setDetailData(JSON.stringify(data[index]));
+        globalData.SetSpinnerVisible(true);
 
+        setDetailData(JSON.stringify(data[index]));
         const dialog = document.getElementById('show_agent') as HTMLDialogElement;
         dialog.showModal();
     }

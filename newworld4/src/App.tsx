@@ -11,10 +11,10 @@ import NavBar from "./elements/navBar/NavBar";
 import Customer from "./screens/customer/customer/Customer";
 
 
+import { globalData, UserContext } from "./helpers/globalData";
+import SpinnerLoader from "./elements/spinnerLoader/SpinnerLoader";
 
 function App() {
-
-
 
     const { instance, accounts } = useMsal();
 
@@ -71,27 +71,27 @@ function App() {
         await SafeFetch("api/RemoveToken", POST({}));
     };
 
-  return (
-      <>
-          <BrowserRouter>
-            <div className="bg-white">
-                <NavBar accounts={accounts} handleLogin={handleLogin} handleLogout={handleLogout}></NavBar>
-            </div>
+    return (
+    <>
+        <UserContext.Provider value={globalData}>
+                <BrowserRouter>
 
-            <div className="h-screen flex-grow bg-gray-300 p-4">
+                <SpinnerLoader></SpinnerLoader>
 
+                <div className="bg-white">
+                    <NavBar accounts={accounts} handleLogin={handleLogin} handleLogout={handleLogout}></NavBar>
+                </div>
 
-
-              <Routes>
-
-                  <Route path="/dashboard" element={<Dashboard />}></Route>
-                  <Route path="/home" element={<Home />}></Route>
-                  <Route path="/customer" element={<Customer />}></Route>
-                  <Route path="/" element={<Home />}></Route>
-              </Routes>
-            </div>
-
-        </BrowserRouter>
+                <div className="h-screen flex-grow bg-gray-300 p-4">
+                    <Routes>
+                        <Route path="/dashboard" element={<Dashboard />}></Route>
+                        <Route path="/home" element={<Home />}></Route>
+                        <Route path="/customer" element={<Customer />}></Route>
+                        <Route path="/" element={<Home />}></Route>
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        </UserContext.Provider>
     </>
   )
 }
