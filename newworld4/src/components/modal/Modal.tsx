@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, type ReactNode } from 'react'
+﻿import { useRef, type ReactNode } from 'react'
 
 export default function Modal({ id, title, children, onClose, buttons }:
     { id: string, title: string, children: ReactNode, onClose?: () => void, buttons?: string }) {
