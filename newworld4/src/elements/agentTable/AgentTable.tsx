@@ -17,22 +17,37 @@ export default function AgentTable() {
         selected: true,
         name: "Hart Hagerty",
         job: "Zemlak, Daniel and Leannon",
-        color: "Purple"
+        color: "Purple",
+        age: 23,
+        height: 76
     }, {
         selected: false,
         name: "Brice Swyre",
-        job: "Caroll Group",
-        color: "Red"
+        job: "Wyman-Ledner",
+        color: "Red",
+        age: 45,
+        height: 54
     }, {
         selected: false,
         name: "Marjy Frencz",
         job: "Rowe-Schoen",
-        color: "Red"
+        color: "Red",
+        age: 56,
+        height: 58
     }, {
         selected: false,
         name: "Yancy Tear",
         job: "Wyman-Ledner",
-        color: "Red"
+        color: "Green",
+        age: 39,
+        height: 74
+    }, {
+        selected: false,
+        name: "Boar Greysom",
+        job: "Wixman White",
+        color: "Purple",
+        age: 54,
+        height: 34
     }];
 
     const [data, setData] = useState<Agent[]>(rawData);
@@ -128,6 +143,8 @@ export default function AgentTable() {
             { id: 0, "active": true, "name": "name", "text": "Name" },
             { id: 1, "active": true, "name": "job", "text": "Job" },
             { id: 2, "active": true, "name": "color", "text": "Color" },
+            { id: 3, "active": false, "name": "height", "text": "Height" },
+            { id: 4, "active": false, "name": "age", "text": "Age" },
         ]
     }
 
@@ -145,7 +162,7 @@ export default function AgentTable() {
 
 
     const getHeader = () => {
-        return columnData != null && columnData.map((column: ColumnData) => { return column.active && <td>{column.name}</td> });
+        return columnData != null && columnData.map((column: ColumnData) => { return column.active && <td>{column.text}</td> });
     }
 
     return (
