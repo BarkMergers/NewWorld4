@@ -114,24 +114,22 @@ export default function AgentTable() {
 
 
 
-
-    useEffect(() => {
-        let initialColumnData;
+    const loadData = (): ColumnData[] => {
         try {
             const rawStorageData: string | null = localStorage.getItem("liststructure_myaccounts")
-            if (rawStorageData == null) {
-                initialColumnData = resetList();
+            if (rawStorageData == null || rawStorageData == "" || rawStorageData == "[]" || rawStorageData == "null") {
+                return resetList();
             }
             else {
-                initialColumnData = JSON.parse(rawStorageData!);
-                if (initialColumnData == 'null' || initialColumnData == null)
-                    initialColumnData = resetList();
+                return JSON.parse(rawStorageData!);
             }
         }
         catch {
-            initialColumnData = resetList();
+            return resetList();
         }
-        setColumnData(initialColumnData);
+    }
+    useEffect(() => {
+        setColumnData(loadData());
     }, []);
     const resetList = () => {
         return [
@@ -142,7 +140,7 @@ export default function AgentTable() {
             { id: 4, active: false, name: "age", text: "Age" },
         ]
     }
-    const [columnData, setColumnData] = useState<ColumnData[]>();
+    const [columnData, setColumnData] = useState<ColumnData[]>(loadData());
     const getHeader = () => {
         return columnData != null && columnData.map((column: ColumnData) => { return column.active && <td>{column.text}</td> });
     }
