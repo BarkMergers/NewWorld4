@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import type { GlobalData } from "../models/GlobalData";
 
-let eventProcessingIconTimeout: NodeJS.Timeout | null = null;
+let eventProcessingIconTimeout: ReturnType<typeof setTimeout> | null = null;
 
 const closeTimer = () => {
     const dialog = document.getElementById('eventProcessingIcon') as HTMLDialogElement;

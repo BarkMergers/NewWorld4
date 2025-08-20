@@ -99,7 +99,6 @@ export default function AgentTable() {
         output = filterValues.color == "" ? output : output.filter(agent => agent.color == filterValues.color);
         output = filterValues.job == "" ? output : output.filter(agent => agent.job == filterValues.job);
         output = filterValues.name == "" ? output : output.filter(agent => agent.name == filterValues.name);
-
         setData(output);
     }
     const [filterValues, setFilterValues] = useState<AgentFilterValues>({ color: "", name: "", job: "" });
