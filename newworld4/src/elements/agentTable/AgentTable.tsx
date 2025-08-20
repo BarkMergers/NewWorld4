@@ -77,9 +77,9 @@ export default function AgentTable() {
 
     const reloadData = () => {
         let output = Array.from(rawData);
-        output = filterValues.color == "" ? output : rawData.filter(agent => agent.color == filterValues.color);
-        output = filterValues.job == "" ? output : rawData.filter(agent => agent.job == filterValues.job);
-        output = filterValues.name == "" ? output : rawData.filter(agent => agent.name == filterValues.name);
+        output = filterValues.color == "" ? output : output.filter(agent => agent.color == filterValues.color);
+        output = filterValues.job == "" ? output : output.filter(agent => agent.job == filterValues.job);
+        output = filterValues.name == "" ? output : output.filter(agent => agent.name == filterValues.name);
 
         setData(output);
     }
