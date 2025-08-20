@@ -1,12 +1,13 @@
-import StatsBar from "../../../elements/statsBar/StatsBar";
+import MyDetails from "../../../elements/myDetails/MyDetails";
 import TitleBar from "../../../elements/titleBar/TitleBar";
+import type { AccountInfo } from "@azure/msal-browser";
 
-export default function Plain() {
+export default function Plain({ accounts }: { accounts: AccountInfo[] }) {
     return (
         <>
             <TitleBar title="NewWORLD"></TitleBar>
 
-            <StatsBar></StatsBar>
+            <MyDetails accounts={accounts} ></MyDetails>
         </>
     )
 }

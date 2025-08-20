@@ -1,4 +1,4 @@
-﻿export default function Input({ value, title, onChange }:
+﻿export default function Check({ value, title, onChange }:
     { value: boolean, title: string, onChange: (event: React.ChangeEvent<HTMLInputElement>) => void }) {
 
     return (

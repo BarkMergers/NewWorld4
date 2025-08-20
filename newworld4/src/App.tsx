@@ -13,6 +13,7 @@ import Customer from "./screens/customer/customer/Customer";
 
 import { globalData, UserContext } from "./helpers/globalData";
 import SpinnerLoader from "./elements/spinnerLoader/SpinnerLoader";
+import Plain from "./screens/home/plain/Plain";
 
 function App() {
 
@@ -84,10 +85,11 @@ function App() {
 
                 <div className="h-screen flex-grow bg-gray-300 p-4">
                     <Routes>
-                        <Route path="/dashboard" element={<Dashboard />}></Route>
-                        <Route path="/home" element={<Home />}></Route>
-                        <Route path="/customer" element={<Customer />}></Route>
-                        <Route path="/" element={<Home />}></Route>
+                            <Route path="/dashboard" element={<Dashboard />}></Route>
+                            <Route path="/home" element={<Home />}></Route>
+                            <Route path="/customer" element={<Customer />}></Route>
+                            <Route path="/plain" element={<Plain accounts={accounts} />}></Route>
+                            <Route path="/" element={<Home />}></Route>
                     </Routes>
                 </div>
             </BrowserRouter>
