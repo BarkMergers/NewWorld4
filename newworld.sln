@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "newworld4", "newworld4\newworld4.esproj", "{6B6226CD-7191-D72A-CA68-90FCAA70C6DF}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "newworld", "newworld\newworld.esproj", "{6B6226CD-7191-D72A-CA68-90FCAA70C6DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
